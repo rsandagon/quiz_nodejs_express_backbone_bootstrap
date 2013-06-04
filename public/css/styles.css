@@ -101,6 +101,12 @@ legend {
     color: #fff;
 }
 
+.quiz .answer{
+    color: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 /* Quick links on Home */
 .bs-docs-social-buttons {
     margin-left: 0;
