@@ -40,7 +40,7 @@ exports.findAssessmentDetails = function(req,res){
 exports.findAssesmentResultById = function(req,res){
 	var assessmentID = parseInt(req.params.assessmentID);
 
-	console.log('Retrieving assessment Result' + assessmentID);
+	console.log('Retrieving assessment Result' + req.params.assessmentID);
 	db.collection('assessment_results',function(err, collection){
 		collection.findOne({'assessmentID': assessmentID},function(err,item){
 			if(err){
@@ -54,10 +54,10 @@ exports.findAssesmentResultById = function(req,res){
 };
 
 exports.updateAssessmentResult = function(req,res){
-	var assessmentID = req.params.assessmentID;
+	var assessmentID = parseInt(req.params.assessmentID);
 	var assessmentResult = req.body;
 
-	console.log('Updating assessmentResult:' + assessmentID);
+	console.log('Updating assessmentResult:' + req.params.assessmentID);
 	console.log(JSON.stringify(wines));
 	db.collection('assessment_results',function(err,collection){
 		collection.update({'assessmentID': assessmentID}, {correct: assessmentResult.correct}, {safe:true}, function(err, result){
