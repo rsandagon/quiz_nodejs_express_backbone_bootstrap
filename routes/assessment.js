@@ -27,7 +27,12 @@ exports.findAssessmentDetails = function(req,res){
 	console.log('Retrieving assessment details for accnt:' + id);
 	db.collection('assessments',function(err, collection){
 		collection.findOne({'assessmentID': 1},function(err,item){
-			res.send(item);			
+			if(err){
+				console.log('Error:' + JSON.stringify(err));
+				res.send({'error':'An error has occurred'});
+			}else{
+				res.send(item);
+			}			
 		});
 	});
 };
@@ -38,7 +43,12 @@ exports.findAssesmentResultById = function(req,res){
 	console.log('Retrieving assessment Result' + assessmentID);
 	db.collection('assessment_results',function(err, collection){
 		collection.findOne({'assessmentID': assessmentID},function(err,item){
-			res.send(item);			
+			if(err){
+				console.log('Error:' + JSON.stringify(err));
+				res.send({'error':'An error has occurred'});
+			}else{
+				res.send(item);
+			}			
 		});
 	});
 };
@@ -48,7 +58,13 @@ exports.findAllQuestions = function(req,res){
 
 	db.collection('questions',function(err,collection){
 		collection.find().toArray(function(err,items){
-			res.send(items);
+			if(err){
+				console.log('Error:' + JSON.stringify(err));
+				res.send({'error':'An error has occurred'});
+			}else{
+				console.log('Success:' + JSON.stringify(items));
+				res.send(items);
+			}
 		});
 	});
 }

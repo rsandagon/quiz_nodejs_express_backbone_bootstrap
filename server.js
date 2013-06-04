@@ -16,7 +16,7 @@ app.get('/', function(req, res) {
         });
     });
 
-app.get('/content/assessment_details/:accountID,type', assessment.findAssessmentDetails);
+app.get('/content/assessment_details/:accountID/:type', assessment.findAssessmentDetails);
 app.get('/content/assessment_result/:assessmentID', assessment.findAssesmentResultById);
 //app.get('/content/assessment_question/:assessmentID', assessment.findAssesmentAndQuestionById);
 //app.put('/content/assessment/:assessmentID', assessment.updateAssessment);
