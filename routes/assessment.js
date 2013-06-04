@@ -4,7 +4,7 @@ var Server = mongo.Server,
 	Db = mongo.Db,
 	BSON = mongo.BSONPure;
 
-var server = new Server('198.199.106.247',27018,{auto_reconnect: true});
+var server = new Server('198.199.106.247',27017,{auto_reconnect: true});
 db = new Db('assessmentdb',server);
 
 db.open(function(err, db){
@@ -44,6 +44,8 @@ exports.findAssesmentResultById = function(req,res){
 };
 
 exports.findAllQuestions = function(req,res){
+	console.log('Retrieving all questions');
+
 	db.collection('questions',function(err,collection){
 		collection.find().toArray(function(err,items){
 			res.send(items);
