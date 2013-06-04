@@ -1,4 +1,4 @@
-window.AboutView = Backbone.View.extend({
+window.AssessmentView = Backbone.View.extend({
 
     initialize:function () {
         this.render();

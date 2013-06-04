@@ -2,11 +2,8 @@ var AppRouter = Backbone.Router.extend({
 
     routes: {
         ""                  : "home",
-        "wines"	: "list",
-        "wines/page/:page"	: "list",
-        "wines/add"         : "addWine",
-        "wines/:id"         : "wineDetails",
-        "about"             : "about"
+        "quiz:id"	        : "quiz",
+        "assessment:id"	    : "assessment"
     },
 
     initialize: function () {
@@ -22,40 +19,25 @@ var AppRouter = Backbone.Router.extend({
         this.headerView.selectMenuItem('home-menu');
     },
 
-	list: function(page) {
-        var p = page ? parseInt(page, 10) : 1;
-        var wineList = new WineCollection();
-        wineList.fetch({success: function(){
-            $("#content").html(new WineListView({model: wineList, page: p}).el);
+    quiz: function (id) {
+        var assessmentResult = new AssessmentResult({assessmentID: id});
+        assessmentResult.fetch({success: function(){
+            $("#content").html(new QuizView({model: assessmentResult}).el);
         }});
-        this.headerView.selectMenuItem('home-menu');
+        this.headerView.selectMenuItem('quiz_menu');
     },
 
-    wineDetails: function (id) {
-        var wine = new Wine({_id: id});
-        wine.fetch({success: function(){
-            $("#content").html(new WineView({model: wine}).el);
+	assessment: function() {
+        var assessmentResult = new AssessmentResult({assessmentID: id});
+        assessmentResult.fetch({success: function(){
+            $("#content").html(new AssessmentView({model: assessmentResult}).el);
         }});
-        this.headerView.selectMenuItem();
-    },
-
-	addWine: function() {
-        var wine = new Wine();
-        $('#content').html(new WineView({model: wine}).el);
-        this.headerView.selectMenuItem('add-menu');
-	},
-
-    about: function () {
-        if (!this.aboutView) {
-            this.aboutView = new AboutView();
-        }
-        $('#content').html(this.aboutView.el);
-        this.headerView.selectMenuItem('about-menu');
-    }
+        this.headerView.selectMenuItem('assessment_menu');
+	}
 
 });
 
-utils.loadTemplate(['HomeView', 'HeaderView', 'WineView', 'WineListItemView', 'AboutView'], function() {
+utils.loadTemplate(['HomeView', 'HeaderView', 'QuizView', 'AssessmentView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });
