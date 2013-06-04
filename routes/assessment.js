@@ -53,6 +53,25 @@ exports.findAssesmentResultById = function(req,res){
 	});
 };
 
+exports.updateAssessmentResult = function(req,res){
+	var assessmentID = req.params.assessmentID;
+	var assessmentResult = req.body;
+
+	console.log('Updating assessmentResult:' + assessmentID);
+	console.log(JSON.stringify(wines));
+	db.collection('assessment_results',function(err,collection){
+		collection.update({'assessmentID': assessmentID}, {correct: assessmentResult.correct}, {safe:true}, function(err, result){
+			if(err){
+				console.log('Error updating assessment_results:' + err);
+				res.send({'error':'An error has occurred'});
+			}else{
+				console.log('' + result + ' document(s) updated');
+				res.send(result);
+			}
+		});
+	});
+}
+
 exports.findAllQuestions = function(req,res){
 	console.log('Retrieving all questions');
 
@@ -84,24 +103,6 @@ exports.addQuestion = function(req,res){
 	});
 }
 
-exports.updateWine = function(req,res){
-	var id = req.params.id;
-	var wine = req.body;
-	console.log('Updating wine:' + id);
-	console.log(JSON.stringify(wines));
-	db.collection('wines',function(err,collection){
-		collection.update({'_id':new BSON.ObjectID(id)}, wine, {safe:true}, function(err, result){
-			if(err){
-				console.log('Error updating wine:' + err);
-				res.send({'error':'An error has occurred'});
-			}else{
-				console.log('' + result + ' document(s) updated');
-				res.send(wine);
-			}
-		});
-	});
-}
-
 exports.deleteWine = function(req,res){
 	var id = req.params.id;
 	console.log('Deleting wine:' + id);
@@ -127,26 +128,41 @@ var populateDB = function(){
 		assessmentID: 1,
 		title: "Vocabulary Placement Test 1",
 		description: "This is a test of your vocabulary knowledge. This test will help you find the best words for you to study. In this part of the test, select the best word to match the definition."
-	},
-	{
-		assessmentID: 2,
-		title: "Vocabulary Placement Test 2",
-		description: "This is a test of your vocabulary knowledge. This test will help you find the best words for you to study. In this part of the test, select the best word to match the definition."
-    }];
+	}];
 
     var assessment_results = [
 	{
 		assessmentID: 1,
 		total: 3,
 		correct: 0,
-		questionID: 1
-	},
-	{
-		assessmentID: 2,
-		total: 3,
-		correct: 0,
-		questionID: 1
-    }];
+		params:null,
+		knowledge:null,
+		answers:null,
+		question: { questionID: 1,
+	    	text: "to speak words",
+	    	answers:[{
+	    		answerID:3, 
+	    		questionID : 1, 
+	    		text :"make",
+	    		isCorrect:false
+	    	},{
+	    		answerID: 4,
+	    		questionID: 1,
+	    		text:"say",
+	    		isCorrect:true
+	    	},{
+	    		answerID:5,
+	    		questionID:1,
+	    		text:"see",
+	    		isCorrect:false
+	    	},{
+	    		answerID :6,
+	    		questionID :1,
+	    		text : "work",
+	    		isCorrect :false
+	    	}]
+	    }
+	}];
 
 
     var questions = [
