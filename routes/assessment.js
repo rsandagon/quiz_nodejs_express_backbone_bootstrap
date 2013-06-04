@@ -24,7 +24,7 @@ exports.findAssessmentDetails = function(req,res){
 	var type = req.params.type;
 
 	//	For demo, alwaus return assessment 1
-	console.log('Retrieving assessment details for accnt:' + id);
+	console.log('Retrieving assessment details for accnt:' + accountID);
 	db.collection('assessments',function(err, collection){
 		collection.findOne({'assessmentID': 1},function(err,item){
 			if(err){
