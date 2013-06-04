@@ -27,7 +27,7 @@ var AppRouter = Backbone.Router.extend({
         this.headerView.selectMenuItem('quiz_menu');
     },
 
-	assessment: function() {
+	assessment: function(id) {
         var assessmentResult = new AssessmentResult({assessmentID: id});
         assessmentResult.fetch({success: function(){
             $("#content").html(new AssessmentView({model: assessmentResult}).el);
