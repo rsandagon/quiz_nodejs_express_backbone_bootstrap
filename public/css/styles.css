@@ -92,8 +92,9 @@ legend {
 }
 
 .quiz {
-    background-color: #3D3D3D;
+    background-color: #FEFEFE;
     font-family: "arvo";
+    text-align: center;
 }
 
 .quiz .question{
@@ -103,8 +104,7 @@ legend {
 
 .quiz .answer{
     color: #fff;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    margin: 20px;
 }
 
 /* Quick links on Home */
