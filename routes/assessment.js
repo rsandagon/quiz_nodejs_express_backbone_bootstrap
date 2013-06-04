@@ -20,7 +20,7 @@ db.open(function(err, db){
 });
 
 exports.findAssessmentDetails = function(req,res){
-	var accountID = req.params.accountID;
+	var accountID = parseInt(req.params.accountID);
 	var type = req.params.type;
 
 	//	For demo, alwaus return assessment 1
@@ -38,7 +38,7 @@ exports.findAssessmentDetails = function(req,res){
 };
 
 exports.findAssesmentResultById = function(req,res){
-	var assessmentID = req.params.assessmentID;
+	var assessmentID = parseInt(req.params.assessmentID);
 
 	console.log('Retrieving assessment Result' + assessmentID);
 	db.collection('assessment_results',function(err, collection){
