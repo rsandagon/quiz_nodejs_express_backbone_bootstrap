@@ -14,7 +14,7 @@ window.Assessment = Backbone.Model.extend({
 
 window.AssessmentResult = Backbone.Model.extend({
 
-    urlRoot: "http://rsandagon.com:3200/content/assessment/",
+    urlRoot: "/content/assessment/",
     idAttribute: "assessmentID",
 
     defaults: {
