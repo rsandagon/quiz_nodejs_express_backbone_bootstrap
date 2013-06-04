@@ -93,6 +93,7 @@ legend {
 
 .quiz {
     background-color: #FEFEFE;
+    display: block;
     font-family: "arvo";
     text-align: center;
 }
@@ -100,13 +101,22 @@ legend {
 .quiz .question{
     background-color: #666666;
     color: #fff;
+    text-align: center; 
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    border-radius: 5px; 
+    min-height: 40px; 
+    line-height: 40px;
+    margin-bottom: 10px;
 }
 
 .quiz .answer{
     color: #fff;
-    margin: 20px;
 }
 
+.quiz .progress{
+    margin-top: 20px;
+}
 /* Quick links on Home */
 .bs-docs-social-buttons {
     margin-left: 0;
